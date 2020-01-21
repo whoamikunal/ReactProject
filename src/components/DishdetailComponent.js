@@ -10,36 +10,34 @@ class DishDetail extends Component {
 
         }
     }
-    renderComments(comments){
-        if(comments.length > 0)
-        {
+    renderComments(comments) {
+        if (comments.length > 0) {
             let comms = comments.map((comm, i) => {
                 let date = new Intl.DateTimeFormat('en-US', {
-                    year:'numeric',
+                    year: 'numeric',
                     month: 'short',
                     day: '2-digit'
                 }).format(new Date(Date.parse(comm.date)))
-                
+
                 return (
-                        <ul key={comm.id} className="list-unstyled">
-                            <li className="comment">{comm.comment}</li>
-                            <li className="author">-- {comm.author}, {date}</li>
-                        </ul>
-                    )
-                });
-            
-            
+                    <ul key={comm.id} className="list-unstyled">
+                        <li className="comment">{comm.comment}</li>
+                        <li className="author">-- {comm.author}, {date}</li>
+                    </ul>
+                )
+            });
+
+
             return (
                 <div className="col-12 col-md-5 m-1">
                     <h4>Comments</h4>
                     <div>{comms}</div>
                 </div>
-                
+
             );
         }
-        else
-        {
-            return(
+        else {
+            return (
                 <div></div>
             )
         }
@@ -66,19 +64,22 @@ class DishDetail extends Component {
 
     render() {
         let comments = [];
-        if(this.props.selectedDish){
-            comments = this.props.selectedDish.comments;
+        if (this.props.dish != null) {
+            comments = this.props.dish.comments;
         }
         return (
-            <div className="row">
-                <div className="col-12 col-md-5 m-1">
-                    {this.renderDish(this.props.selectedDish)}
-                </div>
-                
+            <div className="container">
+
+
+                <div className="row">
+                    <div className="col-12 col-md-5 m-1">
+                        {this.renderDish(this.props.dish)}
+                    </div>
+
                     {this.renderComments(comments)}
-                
+
+                </div>
             </div>
-            
         )
 
 
